@@ -15,7 +15,7 @@ class Getting:
     RefUrl = ''
     types = ''
 
-    def __init__(self, url, RefUrl=None):
+    def __init__(self, url, RefUrl = None):
         self.url = url
         self.RefUrl = url if isinstance(RefUrl, None.__class__) else RefUrl
 

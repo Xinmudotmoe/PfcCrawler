@@ -32,10 +32,10 @@ def GetHrefInele(data, Turl):
         if R_url_re.findall(i):  # 如果成功找到的话 那么这个地址将收到抨击 必须证明此地址属于Host的此根 否则将被丢弃
             TbList.append(i)
         else:  # 如果没能找到的话 这个地址为相对地址 进行相对移动
-            if i[0]=="/":  # 表示指向根
+            if i[0] == "/":  # 表示指向根
                 BigList.append(''.join((Host, i)))
             else:
-                TA=list(TL)
+                TA = list(TL)
                 while True:
                     if i[:3] == "../":
                         TA.pop(-1)
