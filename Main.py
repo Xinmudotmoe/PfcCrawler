@@ -44,11 +44,10 @@ class PaPa:
 
     def ReadH(self, URL):
         # v1.1 修复了不能打开中文网址的bug
-        # TODO:需要判断 如果地址非网页源代码 无需进行解析 且无需压入pool中
         NowUrl = URL
         Getting = MyGet.Getting(NowUrl.decode('utf-8').encode('gbk'), self.Rurl)
         Getting.LoadNow()
-        Getting.save(Utils.getFilePath(NowUrl))
+        Getting.save(Utils.getFilePath(Getting.get_url()))
         self.putSome(Getting.get_href())
 
     def run(self):

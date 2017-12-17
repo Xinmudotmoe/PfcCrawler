@@ -14,7 +14,7 @@ class Getting:
     hx = ''
     RefUrl = ''
     types = ''
-
+    r=''#Debug临时放在这
     def __init__(self, url, RefUrl = None):
         self.url = url
         self.RefUrl = url if isinstance(RefUrl, None.__class__) else RefUrl
@@ -22,9 +22,10 @@ class Getting:
     def LoadNow(self):
         req = urllib2.Request(self.url, headers=Headers)
         req.add_header('Referer', self.RefUrl.__repr__())
-        r = urllib2.urlopen(req)
-        self.hx = r.read()
-        self.types = r.info()
+        self.r = urllib2.urlopen(req)
+        self.hx = self.r.read()
+        self.url = self.r.geturl()
+        self.types = self.r.info().gettype()
 
     def get(self):
         return self.hx
@@ -32,14 +33,18 @@ class Getting:
     def get_href(self):
         return Myparser.GetHrefInele(self.hx, self.url)
 
+    def get_url(self):
+        return self.url
+
     def save(self, path):
-        File = open(path, "w")
+        File = open(path, "wb")
         File.write(self.hx)
         File.close()
 
 
 if __name__ == '__main__':
     # TODO: 没写完呢 千万别运行到这里 没用的
+    raise Exception
     arc = sys.argv[1:]
     if len(arc) == 0:
         print("Error :argv is 0")
