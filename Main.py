@@ -5,7 +5,7 @@ import sys
 import Utils
 import urllib2
 Rpath = sys.argv[0][:sys.argv[0].rfind("/")]
-log = open("log.txt", 'w+',0)
+log = open("log.txt", 'w+', 0)
 
 
 class PaPa:

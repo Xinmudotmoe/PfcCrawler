@@ -1,5 +1,5 @@
 *.py[cod]
-*.txt
+log.txt
 *.zip
 .idea
 *.cn
