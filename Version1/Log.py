@@ -5,7 +5,8 @@ import sys
 import pickle
 
 class __interface_Log:
-
+    def __init__(self):
+        pass
 
     def put_log(self, *args):
         raise Exception("Bad Class")
@@ -50,6 +51,7 @@ class _Json_Log(__interface_Log):
         self.data["hrah"][url] = hraf
 
     def save(self):
+        return 0  # 会抛出异常
         log = open("Log.json", "wb")
         data = json.dumps(self.data)
         log.write(data)

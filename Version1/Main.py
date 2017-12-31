@@ -6,12 +6,10 @@ from Log import Log
 import Utils
 import MyGet
 import Myparser
-import urlparse
 
 Rpath = sys.argv[0][:sys.argv[0].rfind("/")]
 
 debug = False
-
 
 class PaPa:
     # v1 初版
@@ -27,19 +25,11 @@ class PaPa:
         self.OverUrl = []
         self.NextUrl = {url}
         self.ResourceUrl = []
-        self.RpA = urlparse.urlparse(url)
-        self.RootURL = self.RpA.netloc
-        self.Host = self.RpA.hostname
-        self.post = self.RpA.port if not isinstance(self.RpA.port, None.__class__) else 80
+        self.RootURL = Myparser.R_url_re.findall(self.Rurl)[0]
 
     ##like LiFo
     def put(self, url):
         if url in self.NextUrl or url in self.OverUrl:
-            return
-        pA = urlparse.urlparse(url)
-        if pA.hostname != self.RpA.hostname:
-            return
-        if (pA.port if isinstance(pA.port, None.__class__) else 80) != self.post:
             return
         self.NextUrl.add(url)
 
@@ -55,7 +45,7 @@ class PaPa:
         self.OverUrl.append(rel)
         return rel
 
-    def delNeUrl(self, url):  # 极大可能引发异常的方法
+    def delNeUrl(self,url): # 极大可能引发异常的方法
         self.NextUrl.remove(url)
         self.OverUrl.append(url)
         pass
@@ -76,7 +66,7 @@ class PaPa:
         href = Getting.get_href()
         Log.put_hraf(_NowUrl, href)
         self.putSome(href)
-        Log.put_Get_log(True, NowUrl, Getting.code, Getting.types)
+        Log.put_Get_log(True,NowUrl, Getting.code,Getting.types)
 
     def run(self):
         while True:
@@ -86,14 +76,13 @@ class PaPa:
             if not debug:
                 try:
                     self.ReadH(NextUrl)
-                except urllib2.HTTPError, urllib2.URLError:  # 获取现阶段的Bug
-                    Log.put_Get_log(False, NextUrl, None, None)
+                except urllib2.HTTPError,urllib2.URLError:  # 获取现阶段的Bug
+                    Log.put_Get_log(False,NextUrl,None,None)
             else:
                 self.ReadH(NextUrl)
 
-
 if __name__ == "__main__":
     WhatFuck = PaPa("http://118.190.20.36:80/Awebsite/Index.aspx")
-    #WhatFuck = PaPa("http://docs.python.org/")
+    #WhatFuck = PaPa("http://www.lua.org/index.html")
     WhatFuck.run()
     Log.save()

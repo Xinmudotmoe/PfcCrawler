@@ -40,11 +40,10 @@ class Getting:
     r = ''  # Debug临时放在这
     code = 0
 
-    def __init__(self, url, RefUrl=None):
+    def __init__(self, url, RefUrl = None):
         self.url = re.sub(' ', '%20', url)  # Fixme 暂且不知道有什么更好的修正方式
         self.RefUrl = url if isinstance(RefUrl, None.__class__) else RefUrl
         self.code = 0
-        self.src_href=[]
 
     def LoadNow(self):
         req = urllib2.Request(self.url, headers=Headers)
@@ -61,16 +60,7 @@ class Getting:
     def get_href(self):
         if self.types not in UnH and self.types not in AnH:  # Todo Debug用
             print "UnKnow Type", self.types
-        if self.types not in AnH:
-            return []
-        Parser = Myparser.H_Parser(self.url)
-        try:
-            Parser.feed(self.hx)
-        except Myparser.HTMLParseError:
-            pass
-        except UnicodeDecodeError:
-            print "UnicodeDecodeError: url:" + self.url
-        return Parser.src_href
+        return Myparser.GetHrefInele(self.hx, self.url) if self.types not in UnH else []
 
     def get_url(self):
         return self.url
