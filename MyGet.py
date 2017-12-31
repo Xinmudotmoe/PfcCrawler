@@ -4,12 +4,14 @@ import sys
 import Myparser
 import Utils
 import re
+
 Headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) '
                   'AppleWebKit/537.36 (KHTML, like Gecko) '
                   'Chrome/61.0.3163.100 '
                   'Safari/537.36 '
 }
+
 UnH = ["application/octet-stream",
        "image/x-icon",
        "image/jpeg",
@@ -19,7 +21,9 @@ UnH = ["application/octet-stream",
        "application/pdf",
        "image/bmp",
        "application/msword",
-       "image/gif"]  # 无需进行识别的类型
+       "image/gif",
+       "application/gzip"]  # 无需进行识别的类型
+
 AnH = ["text/html",
        "text/css",
        "application/x-javascript",
@@ -45,8 +49,8 @@ class Getting:
         req = urllib2.Request(self.url, headers=Headers)
         req.add_header('Referer', self.RefUrl.__repr__())
         self.r = urllib2.urlopen(req)
-        self.hx = self.r.read()
         self.url = self.r.geturl()
+        self.hx = self.r.read()
         self.types = self.r.info().gettype()
         self.code = self.r.code
 
@@ -65,18 +69,3 @@ class Getting:
         File = open(path, "wb")
         File.write(self.hx)
         File.close()
-
-
-if __name__ == '__main__':
-    # TODO: 没写完呢 千万别运行到这里 没用的
-    raise Exception
-####    arc = sys.argv[1:]
-####    if len(arc) == 0:
-####        print("Error :argv is 0")
-####        sys.exit()
-####    elif len(arc) == 2:
-####        D = Getting(arc[1], arc[0])
-####    elif len(arc) == 1:
-####        D = Getting(*arc)
-####    D.LoadNow()
-####    D.get()  # ???????????

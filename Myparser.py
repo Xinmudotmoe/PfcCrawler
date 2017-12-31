@@ -1,9 +1,9 @@
 # coding=utf-8
 import re
 
-h_url_re = re.compile('href ?= ?"([^"]+)"')  # 额外的空格是为了防止写花盆语言的灵魂代码工程师的灵魂花盆
-r_url_re = re.compile('src ?= ?"([^"]+)"')  # 同上 Fixme:但还没有写GetSrcInele函数 Todo 临时压入了GetHref
-R_url_re = re.compile('https?:\\/\\/[^\\/]+\\/')  # 解析域名
+h_url_re = re.compile('href ?= ?"([^"]+)"', re.I)  # 额外的空格是为了防止写花盆语言的灵魂代码工程师的灵魂花盆
+r_url_re = re.compile('src ?= ?"([^"]+)"', re.I)  # 同上 Fixme:但还没有写GetSrcInele函数 Todo 临时压入了GetHref
+R_url_re = re.compile('https?:\\/\\/[^\\/]+\\/', re.I)  # 解析域名
 T_url_re = re.compile('[^.]\\.\\/')
 
 def get_allurl(data):
@@ -61,7 +61,7 @@ def Url_OA(url, Rurl):
         Aurl=url
     elif url[0] == '/':
         TT=Rurl.find("/", 8)
-        Aurl = ''.join((Rurl[:Rurl.find("/", 8)] if TT!=-1 else Rurl, url))
+        Aurl = ''.join((Rurl[:Rurl.find("/", 8)] if TT != -1 else Rurl, url))
     else:
         Aurl = ''.join((Rurl[:Rurl.rfind("/")+1], url))
 

@@ -38,7 +38,7 @@ def getFilePath(Url):
         Tn = "index.html"
     Tn = re.sub("\?", "$", Tn)
     DicProFuc(Dic)
-    return ("/" if "/" in WSp else "\\").join((Dir, Tn)).decode('utf-8')
+    return ("/" if "/" in WSp else "\\").join((Dir, Tn))  # Why Error?
 
 
 def DicProFuc(dL):
