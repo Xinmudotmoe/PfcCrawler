@@ -41,10 +41,14 @@ class Getting:
     code = 0
 
     def __init__(self, url, RefUrl=None):
+        """
+
+        :type url: str
+        """
         self.url = re.sub(' ', '%20', url)  # Fixme 暂且不知道有什么更好的修正方式
         self.RefUrl = url if isinstance(RefUrl, None.__class__) else RefUrl
         self.code = 0
-        self.src_href=[]
+        self.src_href = []
 
     def LoadNow(self):
         req = urllib2.Request(self.url, headers=Headers)

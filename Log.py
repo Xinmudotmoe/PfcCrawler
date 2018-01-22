@@ -47,7 +47,7 @@ class _Json_Log(__interface_Log):
         self.data["refresh"][source] = target
 
     def put_hraf(self, url, hraf):
-        self.data["hrah"][url] = hraf
+        self.data["hrah"][url] = list(hraf)
 
     def save(self):
         log = open("Log.json", "wb")

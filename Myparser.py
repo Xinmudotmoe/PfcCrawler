@@ -70,6 +70,11 @@ class H_Parser(object, HTMLParser):
         # handle_starttag('a', [('href', 'https://www.cwi.nl/')])
         #TODO: 需要地址筛选处理函数
         for i in attrs:
-            if i[0] == "href" or i[0] == "src":
-                url = urlparse.urljoin(self.Rurl, i[1])
-                self.src_href.add(url)
+            if isinstance(i[0], str):
+                if i[0] in ("href", "src", "HREF", "SRC"):
+                    url = urlparse.urljoin(self.Rurl, i[1])
+                    # 去除网页地址中的锚点
+                    p = url.rfind("#")
+                    if p!=-1:
+                        url=url[:p]
+                    self.src_href.add(url)
